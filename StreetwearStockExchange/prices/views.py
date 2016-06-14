@@ -20,8 +20,7 @@ def get_history(request):
             try:
                 api = Connection(appid='JeffreyC-Streetwe-PRD-f2f871c7c-922e659d', config_file=None)
                 response = api.execute('findCompletedItems', {'keywords': keywords})
-                items = response.reply.searchResult.item
-                return HttpResponse(items)
+                return HttpResponse(response.json())
 
             except ConnectionError as e:
                 return HttpResponse("Connection error.")

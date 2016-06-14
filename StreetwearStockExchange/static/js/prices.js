@@ -27,7 +27,8 @@ function lookupSaleHistory() {
 		data_type: "json",
 		data: {data: JSON.stringify({'search': search})},
 		success: function (data) {
-			console.log(data);
+			data = JSON.parse(data);
+			console.log(data["searchResult"]["item"]);
 		}
 	});
 
