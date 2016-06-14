@@ -29,6 +29,26 @@ function lookupSaleHistory() {
 		success: function (data) {
 			data = JSON.parse(data);
 			console.log(data["searchResult"]["item"]);
+
+			var items = data["searchResult"]["item"];
+			// find mean price
+			var meanPrice = 0;
+			var soldCount = 0;
+
+			for(key in items){
+
+				item = items[key];
+
+				if(item["sellingStatus"]["sellingState"] == "EndedWithSales"){
+					meanPrice += parseInt(item["sellingStatus"]["convertedCurrentPrice"].value);
+					soldCount++;
+				}
+			}
+
+			meanPrice /= soldCount;
+			$('#meanPrice').text("Mean Sold Price: " + meanPrice.toFixed(2));
+
+
 		}
 	});
 
